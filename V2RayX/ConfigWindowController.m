@@ -159,10 +159,14 @@
     //tcp
     [_tcpCrButton setState:[transportSettings[@"tcpSettings"][@"connectionReuse"] boolValue]];
     [_tcpHeaderTypeButton selectItemAtIndex:[transportSettings[@"tcpSettings"][@"header"][@"type"] isEqualToString:@"http"] ? 1 : 0];
+    NSString *savedTcpHost = transportSettings[@"tcpSettings"][@"header"][@"request"][@"headers"][@"Host"][0];
+    [_tcpHostField setStringValue: savedTcpHost != nil ? savedTcpHost : @""];
     //websocket
     [_wsCrButton setState:[transportSettings[@"wsSettings"][@"connectionReuse"] boolValue]];
     NSString *savedWsPath = transportSettings[@"wsSettings"][@"path"];
     [_wsPathField setStringValue: savedWsPath != nil ? savedWsPath : @""];
+    NSString *savedWsHost = transportSettings[@"wsSettings"][@"headers"][@"Host"];
+    [_wsHostField setStringValue: savedWsHost != nil ? savedWsHost : @""];
     //tls
     [_tlsUseButton setState:[[[NSUserDefaults standardUserDefaults] objectForKey:@"useTLS"] boolValue]];
     NSDictionary* tlsSettings = [[NSUserDefaults standardUserDefaults] objectForKey:@"tlsSettings"];
@@ -200,9 +204,11 @@
     //tcp fields
     [_tcpCrButton setState:1];
     [_tcpHeaderTypeButton selectItemAtIndex:0];
+    [_tcpHostField setStringValue:@""];
     //ws fields
     [_wsCrButton setState:1];
     [_wsPathField setStringValue:@""];
+    [_wsHostField setStringValue:@""];
     //mux fields
     [_muxEnableButton setState:0];
     [_muxEnableButton setIntegerValue:8];
@@ -233,11 +239,12 @@
                     },
               @"tcpSettings":
                   @{@"connectionReuse": [NSNumber numberWithBool:[_tcpCrButton state]],
-                    @"header":@{@"type":[[_tcpHeaderTypeButton selectedItem] title]}
+                    @"header":@{@"type":[[_tcpHeaderTypeButton selectedItem] title], @"request":@{@"headers":@{@"Host":@[[_tcpHostField stringValue] != nil ? [_tcpHostField stringValue] : @""]}}}
                     },
               @"wsSettings": @{
                   @"connectionReuse": [NSNumber numberWithBool:[_wsCrButton state]],
-                  @"path": [_wsPathField stringValue] != nil ? [_wsPathField stringValue] : @""
+                  @"path": [_wsPathField stringValue] != nil ? [_wsPathField stringValue] : @"",
+                  @"headers": @{@"Host":[_wsHostField stringValue] != nil ? [_wsHostField stringValue] : @""}
                   }
               };
             NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
