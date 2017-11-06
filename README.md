@@ -10,6 +10,7 @@ __YOU SHOULD READ V2RAY'S OFFICIAL INSTRUCTION BEFORE USING V2RAYX!__
 
 ## Download V2RayX
 [Releases](https://github.com/fun90/V2RayX/releases)
+
 [Releases 原版](https://github.com/Cenmrev/V2RayX/releases)
 
 ## How to build
