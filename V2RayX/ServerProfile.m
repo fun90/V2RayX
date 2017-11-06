@@ -7,7 +7,7 @@
 
 #import "ServerProfile.h"
 
-#define N_Securities 4
+#define N_Securities 5
 
 @implementation ServerProfile
 
@@ -62,7 +62,7 @@
     config[@"outbound"][@"settings"][@"vnext"][0][@"port"] = self.port;
     config[@"outbound"][@"settings"][@"vnext"][0][@"users"][0][@"id"] = self.userId;
     config[@"outbound"][@"settings"][@"vnext"][0][@"users"][0][@"alterId"] = self.alterId;
-    config[@"outbound"][@"settings"][@"vnext"][0][@"users"][0][@"security"] = @[@"aes-128-cfb", @"aes-128-gcm", @"chacha20-poly1305", @"none"][self.security.integerValue % N_Securities];
+    config[@"outbound"][@"settings"][@"vnext"][0][@"users"][0][@"security"] = @[@"aes-128-cfb", @"aes-128-gcm", @"chacha20-poly1305", @"auto", @"none"][self.security.integerValue % N_Securities];
     NSMutableDictionary* streamSettings = [[userDefaults objectForKey:@"transportSettings"] mutableCopy];
     streamSettings[@"network"] = @[@"tcp", @"kcp", @"ws"][self.network.integerValue % 3];
     streamSettings[@"security"] = [[userDefaults objectForKey:@"useTLS"] boolValue] ? @"tls" : @"none";
