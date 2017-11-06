@@ -9,7 +9,8 @@
 __YOU SHOULD READ V2RAY'S OFFICIAL INSTRUCTION BEFORE USING V2RAYX!__
 
 ## Download V2RayX
-[Releases](https://github.com/Cenmrev/V2RayX/releases)
+[Releases](https://github.com/fun90/V2RayX/releases)
+[Releases 原版](https://github.com/Cenmrev/V2RayX/releases)
 
 ## How to build
 V2RayX.app is built by running one of the following commands in your terminal. You can install this via the command-line with curl.
